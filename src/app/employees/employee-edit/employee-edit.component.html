@@ -1,0 +1,165 @@
+<div class="d-flex justify-content-center mt-5">
+    <div class="col-6">
+        <form #editForm="ngForm" (ngSubmit)="onSubmit()" id="editForm">
+          <div class="text-center mb-4">
+            <h1 class="h3 mb-3 font-weight-normal">Employee Editor</h1>
+          </div>
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">Emoloyee Name:</span>
+            </div>
+            <input 
+            type="text" 
+            [(ngModel)]="employee.name"
+            id="name"
+            name="name"
+            class="form-control ml-2"  
+            placeholder="Employee Name" 
+            aria-label="Employee Name" 
+            aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text d-flex justify-content-center" style="width: 144px;" id="basic-addon1" >Address: </span>
+            </div>
+            <input 
+            type="text" 
+            class="form-control ml-2" 
+            [(ngModel)]="employee.address"
+            id="address"
+            name="address"
+            placeholder="Address" 
+            aria-label="Address" 
+            aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text d-flex justify-content-center" style="width: 144px;" id="basic-addon1">We Chat:</span>
+            </div>
+            <input 
+            type="text" 
+            class="form-control ml-2" 
+            [(ngModel)]="employee.weChat"
+            id="weChat"
+            name="weChat"
+            placeholder="We Chat" 
+            aria-label="We Chat" 
+            aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text d-flex justify-content-center" style="width: 144px;" id="basic-addon1">Sick Leave:</span>
+            </div>
+            <input 
+            type="text" 
+            class="form-control ml-2" 
+            [(ngModel)]="employee.sickLeave"
+            id="sickLeave"
+            name="sickLeave" 
+            placeholder="Sick Leave" 
+            aria-label="Sick Leave" 
+            aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text d-flex justify-content-center" style="width: 144px;" id="basic-addon1">Annual Leave:</span>
+            </div>
+            <input 
+            type="text" 
+            class="form-control ml-2" 
+            [(ngModel)]="employee.annualLeave"
+            id="annualLeave"
+            name="annualLeave" 
+            placeholder="Annual Leave" 
+            aria-label="Annual Leave" 
+            aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text d-flex justify-content-center" style="width: 144px;" id="basic-addon1">Pay Rate:</span>
+            </div>
+            <input 
+            type="text" 
+            class="form-control ml-2" 
+            [(ngModel)]="employee.payRate"
+            id="payRate"
+            name="payRate"
+            placeholder="Pay Rate" 
+            aria-label="Pay Rate" 
+            aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text d-flex justify-content-center" style="width: 144px;" id="basic-addon1">Super Account:</span>
+            </div>
+            <input 
+            type="text" 
+            class="form-control ml-2" 
+            [(ngModel)]="employee.superAccount"
+            id="superAccount"
+            name="superAccount" 
+            placeholder="Super Account" 
+            aria-label="Super Account" 
+            aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group mb-3" >
+            <div class="input-group-prepend">
+              <span class="input-group-text d-flex justify-content-center" style="width: 144px;" id="basic-addon1">Department Name:</span>
+            </div>
+            <select 
+            class="custom-select form-control ml-2" 
+            id="departmentName" 
+            name="departmentId"
+            [(ngModel)]="employee.departmentId"
+            >
+              <option 
+              *ngFor="let department of departments"
+              ng-selected="employee.departmentId"
+              [value]="department.id" 
+              >
+                {{department.name}}
+              </option>
+            </select>
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text d-flex justify-content-center" style="width: 144px;" id="basic-addon1">Birth Date:</span>
+            </div>
+            <input 
+            type="text" 
+            class="form-control ml-2" 
+            [(ngModel)]="employee.birthDate"
+            id="birthDate"
+            name="birthDate" 
+            bsDatepicker
+            #dp="bsDatepicker"
+            placeholder="Super Account" 
+            aria-label="Super Account" 
+            aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text d-flex justify-content-center" style="width: 144px;" id="basic-addon1">Hire Date:</span>
+            </div>
+            <input 
+            type="text" 
+            class="form-control ml-2" 
+            [(ngModel)]="employee.hireDate"
+            id="hireDate"
+            name="hireDate" 
+            #dp="bsDatepicker"
+            bsDatepicker
+            placeholder="Hire Date" 
+            aria-label="Hire Date" 
+            aria-describedby="basic-addon1">
+          </div>
+
+          <button class="btn btn-primary mr-2" [disabled]="editForm.invalid"><i class="far fa-save mr-1"></i>Save</button>
+          <p class="mt-5 mb-3 text-muted text-center">© 2021</p>
+
+        </form>
+      </div>
+
+      
+</div>
