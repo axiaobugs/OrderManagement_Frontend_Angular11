@@ -1,6 +1,6 @@
 import { EmployeeReturn } from './../../shared/models/employee';
 import { Component, OnInit} from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DepartmentService } from 'src/app/department/department.service';
 import { IDepartment } from 'src/app/shared/models/department';
@@ -19,16 +19,16 @@ export class EmployeeAddComponent implements OnInit {
   returnUrl:string;
   departments:IDepartment[];
   editForm = new FormGroup({
-    name:new FormControl(),
-    address:new FormControl(),
-    weChat:new FormControl(),
-    sickLeave:new FormControl('0'),
-    annualLeave:new FormControl('0'),
-    payRate:new FormControl('0'),
-    superAccount:new FormControl(),
-    departmentId:new FormControl(),
-    birthDate:new FormControl(new Date()),
-    hireDate:new FormControl(new Date())
+    name:new FormControl('',Validators.required),
+    address:new FormControl('',Validators.required),
+    weChat:new FormControl('',Validators.required),
+    sickLeave:new FormControl('0',Validators.required),
+    annualLeave:new FormControl('0',Validators.required),
+    payRate:new FormControl('0',Validators.required),
+    superAccount:new FormControl('',Validators.required),
+    departmentId:new FormControl('',Validators.required),
+    birthDate:new FormControl(new Date(),Validators.required),
+    hireDate:new FormControl(new Date(),Validators.required)
   })
 
   constructor(private employeeService:EmployeeService,
@@ -54,6 +54,9 @@ export class EmployeeAddComponent implements OnInit {
     })
   }
 
+  cancelHandler(){
+    console.log("hello")
+  }
 
 
 

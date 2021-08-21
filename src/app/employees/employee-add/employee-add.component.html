@@ -6,104 +6,14 @@
           </div>
 
 
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="basic-addon1">Emoloyee Name:</span>
-            </div>
-            <input 
-            type="text" 
-            formControlName="name"
-            id="name"
-            name="name"
-            class="form-control ml-2"  
-            placeholder="Employee Name" 
-            aria-label="Employee Name" 
-            aria-describedby="basic-addon1">
-          </div>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text d-flex justify-content-center" style="width: 144px;" id="basic-addon1" >Address: </span>
-            </div>
-            <input 
-            type="text" 
-            class="form-control ml-2" 
-            formControlName="address"
-            id="address"
-            name="address"
-            placeholder="Address" 
-            aria-label="Address" 
-            aria-describedby="basic-addon1">
-          </div>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text d-flex justify-content-center" style="width: 144px;" id="basic-addon1">We Chat:</span>
-            </div>
-            <input 
-            type="text" 
-            class="form-control ml-2" 
-            formControlName="weChat"
-            id="weChat"
-            name="weChat"
-            placeholder="We Chat" 
-            aria-label="We Chat" 
-            aria-describedby="basic-addon1">
-          </div>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text d-flex justify-content-center" style="width: 144px;" id="basic-addon1">Sick Leave:</span>
-            </div>
-            <input 
-            type="text" 
-            class="form-control ml-2" 
-            formControlName="sickLeave"
-            id="sickLeave"
-            name="sickLeave" 
-            placeholder="Sick Leave" 
-            aria-label="Sick Leave" 
-            aria-describedby="basic-addon1">
-          </div>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text d-flex justify-content-center" style="width: 144px;" id="basic-addon1">Annual Leave:</span>
-            </div>
-            <input 
-            type="text" 
-            class="form-control ml-2" 
-            formControlName="annualLeave"
-            id="annualLeave"
-            name="annualLeave" 
-            placeholder="Annual Leave" 
-            aria-label="Annual Leave" 
-            aria-describedby="basic-addon1">
-          </div>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text d-flex justify-content-center" style="width: 144px;" id="basic-addon1">Pay Rate:</span>
-            </div>
-            <input 
-            type="text" 
-            class="form-control ml-2" 
-            formControlName="payRate"
-            id="payRate"
-            name="payRate"
-            placeholder="Pay Rate" 
-            aria-label="Pay Rate" 
-            aria-describedby="basic-addon1">
-          </div>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text d-flex justify-content-center" style="width: 144px;" id="basic-addon1">Super Account:</span>
-            </div>
-            <input 
-            type="text" 
-            class="form-control ml-2" 
-            formControlName="superAccount"
-            id="superAccount"
-            name="superAccount" 
-            placeholder="Super Account" 
-            aria-label="Super Account" 
-            aria-describedby="basic-addon1">
-          </div>
+          <app-text-input formControlName="name" [label]="'Employee Name'" [name]="'name'" ></app-text-input>
+          <app-text-input formControlName="address" [label]="'Address'" [name]="'address'" ></app-text-input>
+          <app-text-input formControlName="weChat" [label]="'We Chat'" [name]="'weChat'" ></app-text-input>
+          <app-text-input formControlName="sickLeave" [label]="'Sick Leave'" [name]="'sickLeave'" ></app-text-input>
+          <app-text-input formControlName="annualLeave" [label]="'Annual Leave'" [name]="'annualLeave'" ></app-text-input>
+          <app-text-input formControlName="payRate" [label]="'Pay Rate'" [name]="'payRate'" ></app-text-input>
+          <app-text-input formControlName="superAccount" [label]="'Super Account'" [name]="'superAccount'" ></app-text-input>
+
           <div class="input-group mb-3" >
             <div class="input-group-prepend">
               <span class="input-group-text d-flex justify-content-center" style="width: 144px;" id="basic-addon1">Department Name:</span>
@@ -154,14 +64,11 @@
             aria-label="Hire Date" 
             aria-describedby="basic-addon1">
           </div>
-
-          
-          <button  class="btn btn-primary mr-2 " [disabled]="editForm.invalid"><i class="far fa-save mr-1"></i>Save</button>
-          <button  class="btn btn-warning mr-2 " [disabled]="editForm.invalid"><i class="fas fa-undo mr-1"></i>Cencel</button>
-        
-          <p class="mt-5 mb-3 text-muted text-center">© 2021</p>
-
         </form>
+        <button  class="btn btn-primary mr-2 " [disabled]="editForm.invalid" (click)="onSubmit()"><i class="far fa-save mr-1"></i>Save</button>
+        <button  class="btn btn-warning mr-2 " (click)="cancelHandler()"><i class="fas fa-undo mr-1"></i>Cencel</button>
+
+        <p class="mt-5 mb-3 text-muted text-center">© 2021</p>
       </div>
 
       
