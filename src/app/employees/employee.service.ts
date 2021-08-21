@@ -39,5 +39,14 @@ export class EmployeeService {
     )
   }
 
+  deleteEmployee(employee:EmployeeReturn){
+    return this.http.delete(this.baseUrl+'employee/'+employee.id).pipe(
+      map(res=>{
+        console.log(res)
+        return res;
+      })
+    );
+  }
+
 
 }
