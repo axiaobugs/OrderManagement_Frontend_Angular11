@@ -1,8 +1,8 @@
 <div class="d-flex justify-content-center mt-5">
     <div class="col-6">
-        <form #editForm="ngForm" (ngSubmit)="onSubmit()" id="editForm">
+        <form [formGroup]="editForm" (ngSubmit)="onSubmit()" id="editForm">
           <div class="text-center mb-4">
-            <h1 class="h3 mb-3 font-weight-normal">Employee Editor</h1>
+            <h1 class="h3 mb-3 font-weight-normal">Employee Add</h1>
           </div>
 
 
@@ -12,7 +12,7 @@
             </div>
             <input 
             type="text" 
-            [(ngModel)]="employee.name"
+            formControlName="name"
             id="name"
             name="name"
             class="form-control ml-2"  
@@ -27,7 +27,7 @@
             <input 
             type="text" 
             class="form-control ml-2" 
-            [(ngModel)]="employee.address"
+            formControlName="address"
             id="address"
             name="address"
             placeholder="Address" 
@@ -41,7 +41,7 @@
             <input 
             type="text" 
             class="form-control ml-2" 
-            [(ngModel)]="employee.weChat"
+            formControlName="weChat"
             id="weChat"
             name="weChat"
             placeholder="We Chat" 
@@ -55,7 +55,7 @@
             <input 
             type="text" 
             class="form-control ml-2" 
-            [(ngModel)]="employee.sickLeave"
+            formControlName="sickLeave"
             id="sickLeave"
             name="sickLeave" 
             placeholder="Sick Leave" 
@@ -69,7 +69,7 @@
             <input 
             type="text" 
             class="form-control ml-2" 
-            [(ngModel)]="employee.annualLeave"
+            formControlName="annualLeave"
             id="annualLeave"
             name="annualLeave" 
             placeholder="Annual Leave" 
@@ -83,7 +83,7 @@
             <input 
             type="text" 
             class="form-control ml-2" 
-            [(ngModel)]="employee.payRate"
+            formControlName="payRate"
             id="payRate"
             name="payRate"
             placeholder="Pay Rate" 
@@ -97,7 +97,7 @@
             <input 
             type="text" 
             class="form-control ml-2" 
-            [(ngModel)]="employee.superAccount"
+            formControlName="superAccount"
             id="superAccount"
             name="superAccount" 
             placeholder="Super Account" 
@@ -110,13 +110,12 @@
             </div>
             <select 
             class="custom-select form-control ml-2" 
-            id="departmentName" 
+            id="departmentId" 
             name="departmentId"
-            [(ngModel)]="employee.departmentId"
+            formControlName="departmentId"
             >
               <option 
               *ngFor="let department of departments"
-              ng-selected="employee.departmentId"
               [value]="department.id" 
               >
                 {{department.name}}
@@ -130,13 +129,13 @@
             <input 
             type="text" 
             class="form-control ml-2" 
-            [(ngModel)]="employee.birthDate"
+            formControlName="birthDate"
             id="birthDate"
             name="birthDate" 
             bsDatepicker
             #dp="bsDatepicker"
-            placeholder="Birth Date" 
-            aria-label="Birth Date" 
+            placeholder="Super Account" 
+            aria-label="Super Account" 
             aria-describedby="basic-addon1">
           </div>
           <div class="input-group mb-3">
@@ -146,7 +145,7 @@
             <input 
             type="text" 
             class="form-control ml-2" 
-            [(ngModel)]="employee.hireDate"
+            formControlName="hireDate"
             id="hireDate"
             name="hireDate" 
             #dp="bsDatepicker"
@@ -160,7 +159,6 @@
           <button  class="btn btn-primary mr-2 " [disabled]="editForm.invalid"><i class="far fa-save mr-1"></i>Save</button>
           <button  class="btn btn-warning mr-2 " [disabled]="editForm.invalid"><i class="fas fa-undo mr-1"></i>Cencel</button>
         
-          
           <p class="mt-5 mb-3 text-muted text-center">© 2021</p>
 
         </form>

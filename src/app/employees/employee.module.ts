@@ -6,13 +6,15 @@ import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { EmployeeHomeComponent } from './employee-home.component';
 import { EmployeeEditComponent } from './employee-edit/employee-edit.component';
+import { EmployeeAddComponent } from './employee-add/employee-add.component';
 
 
 @NgModule({
   declarations: [
     EmployeeListComponent,
     EmployeeHomeComponent,
-    EmployeeEditComponent
+    EmployeeEditComponent,
+    EmployeeAddComponent
   ],
   imports: [
     CommonModule,

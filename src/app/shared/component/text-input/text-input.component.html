@@ -15,9 +15,8 @@
     (input)="onChange($event.target.value)"
     [type]="type"
     (blur)="onTouched()"
-    [(ngModel)]="module"
     id="{{name}}"
-    [name]="name"
+    name="{{name}}"
     #input
     class="form-control"
     placeholder="{{label}}"

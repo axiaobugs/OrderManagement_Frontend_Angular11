@@ -1,16 +1,11 @@
 import { DepartmentService } from './../../department/department.service';
-import { map } from 'rxjs/operators';
 import { environment } from './../../../environments/environment';
-import { HttpClient } from '@angular/common/http';
 import { IDepartment } from './../../shared/models/department';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeeService } from './../employee.service';
 import { EmployeeReturn } from './../../shared/models/employee';
 import { Component,  OnInit, ViewChild} from '@angular/core';
-import { stringify } from '@angular/compiler/src/util';
-import { DateFormatter } from 'ngx-bootstrap/datepicker';
-
 
 @Component({
   selector: 'app-employee-edit',

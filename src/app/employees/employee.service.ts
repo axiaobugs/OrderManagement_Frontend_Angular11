@@ -42,10 +42,17 @@ export class EmployeeService {
   deleteEmployee(employee:EmployeeReturn){
     return this.http.delete(this.baseUrl+'employee/'+employee.id).pipe(
       map(res=>{
-        console.log(res)
         return res;
       })
     );
+  }
+
+  createEmployee(employee:EmployeeReturn){
+    return this.http.post(this.baseUrl+'employee',employee).pipe(
+      map(res=>{
+        return res;
+      })
+    )
   }
 
 
