@@ -10,12 +10,16 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class EmployeeHomeComponent implements OnInit {
   employees:EmployeeReturn[];
+  totalCount:number
+
 
   constructor(private employeeService:EmployeeService,private route:ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.route.data.subscribe(data=>this.employees=data.employees) 
   }
+
+  
+
 
 }
 

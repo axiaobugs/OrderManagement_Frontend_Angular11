@@ -65,8 +65,11 @@
             aria-describedby="basic-addon1">
           </div>
         </form>
-        <button  class="btn btn-primary mr-2 " [disabled]="editForm.invalid" (click)="onSubmit()"><i class="far fa-save mr-1"></i>Save</button>
-        <button  class="btn btn-warning mr-2 " (click)="cancelHandler()"><i class="fas fa-undo mr-1"></i>Cencel</button>
+        <div class="d-flex justify-content-around">
+            <button  class=" btn btn-primary mr-2 btn-lg " [disabled]="editForm.invalid" (click)="onSubmit()"><i class="far fa-save mr-1"></i>Save</button>
+            <button  class=" btn btn-warning mr-2 " (click)="cancelHandler()"><i class="fas fa-undo mr-1"></i>Cencel</button>
+        </div>
+        
 
         <p class="mt-5 mb-3 text-muted text-center">© 2021</p>
       </div>

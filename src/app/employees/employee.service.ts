@@ -1,22 +1,30 @@
+import { EmployeeParams } from 'src/app/shared/models/employeeParams';
+import { IPagination } from './../shared/models/pagination';
 import { EmployeeReturn } from './../shared/models/employee';
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {map} from "rxjs/operators";
+import { Pagination } from '../shared/models/pagination';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeService {
   baseUrl = environment.baseUrl;
+  pagination = new Pagination();
+  employeeParams = new EmployeeParams();
+
 
 
   constructor(private http:HttpClient) { }
 
-  getEmployees(){
-    return this.http.get<EmployeeReturn[]>(this.baseUrl+'employee').pipe(
+  getEmployees(params:HttpParams){
+
+    return this.http.get<IPagination>(this.baseUrl+'employee',{observe:'response',params}).pipe(
       map(response=>{
-        return response;
+        this.pagination=response.body;
+        return this.pagination;
       })
     )
   }
@@ -54,6 +62,8 @@ export class EmployeeService {
       })
     )
   }
+
+
 
 
 }

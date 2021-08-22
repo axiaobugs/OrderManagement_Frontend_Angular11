@@ -1,8 +1,11 @@
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeeService } from './../employee.service';
 import { EmployeeReturn } from './../../shared/models/employee';
-import { Component, Input, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { EmployeeParams } from 'src/app/shared/models/employeeParams';
+import { Pagination } from 'src/app/shared/models/pagination';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-employee-list',
@@ -10,9 +13,11 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
   styleUrls: ['./employee-list.component.css']
 })
 export class EmployeeListComponent implements OnInit {
-  @Input() employees:EmployeeReturn[];
+  employees:EmployeeReturn[];
+  totalCount:number;
   modalRef: BsModalRef;
-  returnUrl:string;
+  returnUrl:string; pagination = new Pagination();
+  employeeParams = new EmployeeParams();
 
 
   constructor(private employeeService:EmployeeService,
@@ -23,7 +28,23 @@ export class EmployeeListComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.getEmployees();
     this.returnUrl=this.activatedRoute.snapshot.queryParams.returnUrl ||'/employee/home';
+  }
+
+  getEmployees(){
+    let params = new HttpParams();
+    params = params.append('pageIndex',this.employeeParams.pageNumber.toString());
+    params = params.append('pageSize',this.employeeParams.pageSize.toString());
+
+
+    this.employeeService.getEmployees(params).subscribe(response => {
+      this.employees = response.data;
+      this.totalCount = response.count;
+      console.log(this.totalCount)
+    },err => {
+      console.log(err);
+    });
   }
 
   openModal(detailTemplate: TemplateRef<any>) {
@@ -35,6 +56,24 @@ export class EmployeeListComponent implements OnInit {
     this.employeeService.deleteEmployee(employee).subscribe(res=>{
       window.location.reload();
     });
+  }
+
+  onPageChanged(event:any){
+    const params = this.getShopParams();
+    // only execute when page number changed
+    if (params.pageNumber!==event){
+      params.pageNumber = event;
+      this.setEmployeeParams(params);
+      this.getEmployees();
+    }
+  }
+
+  setEmployeeParams(params:EmployeeParams){
+    this.employeeParams=params;
+  }
+
+  getShopParams(){
+    return this.employeeParams;
   }
 
 }

@@ -43,7 +43,7 @@ export class EmployeeEditComponent implements OnInit{
     
   }
 
-  // TODO: 该方法暂时此处,之后会放在department.service里面.
+  
   getAllDepartments(){
     this.departmentService.loadAllDepartment().subscribe(res=>{
       this.departments=res;
@@ -57,5 +57,10 @@ export class EmployeeEditComponent implements OnInit{
     },error=>{
       console.log(error)
     })
+  }
+
+  // TODO: 增加dirt检查取消的modal确认窗口
+  cancelHandler(){
+    this.router.navigateByUrl('employee/home')
   }
 }

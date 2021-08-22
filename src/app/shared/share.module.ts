@@ -7,11 +7,16 @@ import { TimeagoModule } from 'ngx-timeago';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { PagerComponent } from './component/pager/pager.component';
+import { PagingHeaderComponent } from './component/paging-header/paging-header.component';
 
 
 @NgModule({
   declarations: [
-    TextInputComponent
+    TextInputComponent,
+    PagerComponent,
+    PagingHeaderComponent
   ],
   imports: [
     CommonModule,
@@ -22,6 +27,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     ReactiveFormsModule,
     FormsModule,
     BsDatepickerModule.forRoot(),
+    PaginationModule.forRoot()
   ],
   exports:[
     BsDropdownModule,
@@ -30,7 +36,10 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     ModalModule,
     ReactiveFormsModule,
     FormsModule,
-    BsDatepickerModule
+    BsDatepickerModule,
+    PaginationModule,
+    PagerComponent,
+    PagingHeaderComponent
   ]
 })
 export class ShareModule { }

@@ -55,7 +55,7 @@ export class EmployeeAddComponent implements OnInit {
   }
 
   cancelHandler(){
-    console.log("hello")
+    window.location.reload();
   }
 
 
