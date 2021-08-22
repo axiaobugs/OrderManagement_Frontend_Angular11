@@ -6,6 +6,7 @@ import { DepartmentService } from 'src/app/department/department.service';
 import { IDepartment } from 'src/app/shared/models/department';
 import { environment } from 'src/environments/environment';
 import { EmployeeService } from '../employee.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-employee-add',
@@ -34,18 +35,15 @@ export class EmployeeAddComponent implements OnInit {
   constructor(private employeeService:EmployeeService,
               private activatedRoute:ActivatedRoute,
               private router:Router,
-              private departmentService:DepartmentService) { }
+              private departmentService:DepartmentService) {
+                this.departmentService.departments$.pipe(take(1)).subscribe(dep=>this.departments=dep);
+               }
 
   ngOnInit(): void {
-    this.getAllDepartments();
     this.returnUrl=this.activatedRoute.snapshot.queryParams.returnUrl ||'/employee/home';
   }
 
-  getAllDepartments(){
-    this.departmentService.loadAllDepartment().subscribe(res=>{
-      this.departments=res;
-    });
-  }
+  
 
   onSubmit(){
     this.employee=this.editForm.value

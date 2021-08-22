@@ -13,7 +13,7 @@ import { Pagination } from '../shared/models/pagination';
 export class EmployeeService {
   baseUrl = environment.baseUrl;
   pagination = new Pagination();
-  employeeParams = new EmployeeParams();
+
 
 
 

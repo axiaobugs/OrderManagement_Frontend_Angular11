@@ -1,7 +1,5 @@
-import { EmployeeService } from './employee.service';
-import { EmployeeReturn } from './../shared/models/employee';
+import { DepartmentService } from 'src/app/department/department.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-employee-home',
@@ -9,18 +7,16 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./employee-home.component.css']
 })
 export class EmployeeHomeComponent implements OnInit {
-  employees:EmployeeReturn[];
-  totalCount:number
 
 
-  constructor(private employeeService:EmployeeService,private route:ActivatedRoute) { }
+
+  constructor(private department:DepartmentService) {
+    
+   }
 
   ngOnInit(): void {
+   
   }
-
-  
-
-
 }
 
 

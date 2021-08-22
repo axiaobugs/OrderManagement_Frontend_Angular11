@@ -1,3 +1,4 @@
+import { DepartmentService } from 'src/app/department/department.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeeService } from './../employee.service';
 import { EmployeeReturn } from './../../shared/models/employee';
@@ -12,19 +13,28 @@ import { HttpParams } from '@angular/common/http';
   templateUrl: './employee-list.component.html',
   styleUrls: ['./employee-list.component.css']
 })
+
+// TODO: sortOptions 放在config文件中
+// TODO: department[] 要在home组件中,且是observable类型,可以实现状态管理
 export class EmployeeListComponent implements OnInit {
   employees:EmployeeReturn[];
   totalCount:number;
   modalRef: BsModalRef;
   returnUrl:string; pagination = new Pagination();
   employeeParams = new EmployeeParams();
+  sortOptions = [{name:'Alphabetical',value:'name'},
+    {name: 'Pay Rate: Low to High',value:'payRateAsc'},
+    {name: 'Pat Rate: High to Low',value:'patRateDesc'}];
 
 
   constructor(private employeeService:EmployeeService,
     private modalService: BsModalService,
     private router:Router,
-    private activatedRoute:ActivatedRoute) {
-
+    private activatedRoute:ActivatedRoute,
+    private departmentService:DepartmentService) {
+      this.departmentService.loadAllDepartment().subscribe(res=>{
+        console.log(" Employee List 初始化完成: "+res)
+      });
    }
 
   ngOnInit(): void {
@@ -34,6 +44,7 @@ export class EmployeeListComponent implements OnInit {
 
   getEmployees(){
     let params = new HttpParams();
+    params = params.append('sort',this.employeeParams.sort);
     params = params.append('pageIndex',this.employeeParams.pageNumber.toString());
     params = params.append('pageSize',this.employeeParams.pageSize.toString());
 
@@ -41,7 +52,6 @@ export class EmployeeListComponent implements OnInit {
     this.employeeService.getEmployees(params).subscribe(response => {
       this.employees = response.data;
       this.totalCount = response.count;
-      console.log(this.totalCount)
     },err => {
       console.log(err);
     });
@@ -59,7 +69,7 @@ export class EmployeeListComponent implements OnInit {
   }
 
   onPageChanged(event:any){
-    const params = this.getShopParams();
+    const params = this.getEmployeeParams();
     // only execute when page number changed
     if (params.pageNumber!==event){
       params.pageNumber = event;
@@ -72,8 +82,15 @@ export class EmployeeListComponent implements OnInit {
     this.employeeParams=params;
   }
 
-  getShopParams(){
+  getEmployeeParams(){
     return this.employeeParams;
+  }
+
+  onSortSelected(sort:string){
+    const params = this.getEmployeeParams();
+    params.sort = sort;
+    this.setEmployeeParams(params);
+    this.getEmployees();
   }
 
 }

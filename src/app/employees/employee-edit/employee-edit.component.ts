@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeeService } from './../employee.service';
 import { EmployeeReturn } from './../../shared/models/employee';
 import { Component,  OnInit, ViewChild} from '@angular/core';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-employee-edit',
@@ -23,14 +24,15 @@ export class EmployeeEditComponent implements OnInit{
               private activatedRoute:ActivatedRoute,
               private router:Router,
               private departmentService:DepartmentService) {
-          
+                this.departmentService.departments$.pipe(take(1)).subscribe(dep=>{
+                  this.departments=dep;
+                });
               }
 
   ngOnInit(): void {
-    this.getAllDepartments();
     this.loadEmployee();
     this.returnUrl=this.activatedRoute.snapshot.queryParams.returnUrl ||'/employee/home';
-   
+    console.log("edit中查看departments: "+this.departments);
   }
 
   loadEmployee(){
@@ -38,18 +40,9 @@ export class EmployeeEditComponent implements OnInit{
       employee.birthDate =  new Date(employee.birthDate);
       employee.hireDate = new Date(employee.hireDate);
       this.employee=employee;
-      console.log(this.employee.birthDate)
     })
     
   }
-
-  
-  getAllDepartments(){
-    this.departmentService.loadAllDepartment().subscribe(res=>{
-      this.departments=res;
-    });
-  }
-
 
   onSubmit(){
     this.employeeService.updateEmployee(this.employee).subscribe(()=>{
