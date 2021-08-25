@@ -1,5 +1,6 @@
+import { IDepartment } from './../../shared/models/department';
 import { DepartmentService } from 'src/app/department/department.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute} from '@angular/router';
 import { EmployeeService } from './../employee.service';
 import { EmployeeReturn } from './../../shared/models/employee';
 import { Component, OnInit, TemplateRef } from '@angular/core';
@@ -7,6 +8,9 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { EmployeeParams } from 'src/app/shared/models/employeeParams';
 import { Pagination } from 'src/app/shared/models/pagination';
 import { HttpParams } from '@angular/common/http';
+import { take } from 'rxjs/operators';
+import { employeeConfig } from 'src/app/shared/config/employeeConfig';
+
 
 @Component({
   selector: 'app-employee-list',
@@ -14,36 +18,40 @@ import { HttpParams } from '@angular/common/http';
   styleUrls: ['./employee-list.component.css']
 })
 
-// TODO: sortOptions 放在config文件中
-// TODO: department[] 要在home组件中,且是observable类型,可以实现状态管理
 export class EmployeeListComponent implements OnInit {
   employees:EmployeeReturn[];
   totalCount:number;
   modalRef: BsModalRef;
-  returnUrl:string; pagination = new Pagination();
+  returnUrl:string; 
+  pagination = new Pagination();
   employeeParams = new EmployeeParams();
-  sortOptions = [{name:'Alphabetical',value:'name'},
-    {name: 'Pay Rate: Low to High',value:'payRateAsc'},
-    {name: 'Pat Rate: High to Low',value:'patRateDesc'}];
+  departments:IDepartment[];
+  sortOptions = employeeConfig.sortOptions;
 
 
   constructor(private employeeService:EmployeeService,
     private modalService: BsModalService,
-    private router:Router,
     private activatedRoute:ActivatedRoute,
     private departmentService:DepartmentService) {
-      this.departmentService.loadAllDepartment().subscribe(res=>{
-        console.log(" Employee List 初始化完成: "+res)
+      this.departmentService.departments$.pipe(take(1)).subscribe(dep=>{
+        this.departments=dep;
       });
    }
 
   ngOnInit(): void {
     this.getEmployees();
     this.returnUrl=this.activatedRoute.snapshot.queryParams.returnUrl ||'/employee/home';
+    console.log(this.employees)
   }
 
   getEmployees(){
     let params = new HttpParams();
+
+    // All request parameters are executed here
+    if(this.employeeParams.departmentId>0){
+      params = params.append('departmentId',this.employeeParams.departmentId)
+    }
+
     params = params.append('sort',this.employeeParams.sort);
     params = params.append('pageIndex',this.employeeParams.pageNumber.toString());
     params = params.append('pageSize',this.employeeParams.pageSize.toString());
@@ -89,6 +97,14 @@ export class EmployeeListComponent implements OnInit {
   onSortSelected(sort:string){
     const params = this.getEmployeeParams();
     params.sort = sort;
+    this.setEmployeeParams(params);
+    this.getEmployees();
+  }
+
+  OnDepartmentSelected(departmentId:number){
+    const params = this.getEmployeeParams();
+    params.departmentId = departmentId;
+    params.pageNumber =1;
     this.setEmployeeParams(params);
     this.getEmployees();
   }

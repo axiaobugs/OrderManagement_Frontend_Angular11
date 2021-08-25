@@ -8,12 +8,12 @@
                   [value]="sort.value">{{sort.name}}</option>
         </select>
     </section>
-    <section class="d-flex align-items-center col-6 my-2">
-      <h5 class="text-warning mr-3">Sort</h5>
-       <select  class="custom-select " (change)="onSortSelected($event.target.value)" style="width: 45%;">
-         <option *ngFor="let sort of sortOptions"
-                 [selected]="employeeParams.sort ===sort.value"
-                 [value]="sort.value">{{sort.name}}</option>
+    <section class="d-flex align-items-center col-6 my-2" (change)="OnDepartmentSelected($event.target.value)">
+      <h5 class="text-warning mr-3">Dispay by Department</h5>
+       <select  class="custom-select"  style="width: 45%;">
+         <option *ngFor="let department of departments"
+                 [value]="department.id">{{department.name}}</option>
+        <option value="0">All</option>
        </select>
     </section>   
             
@@ -68,6 +68,10 @@
   </tbody>
 </table>
 </div>
+
+<dvi class="d-flex justify-content-start" *ngIf="totalCount>0">
+  <p>Total: {{totalCount}} employees! </p>
+</dvi>
 
 <div class="d-flex justify-content-end" *ngIf="totalCount>0">
   <app-pager

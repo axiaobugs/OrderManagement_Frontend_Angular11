@@ -34,7 +34,6 @@ export class EmployeeAddComponent implements OnInit {
 
   constructor(private employeeService:EmployeeService,
               private activatedRoute:ActivatedRoute,
-              private router:Router,
               private departmentService:DepartmentService) {
                 this.departmentService.departments$.pipe(take(1)).subscribe(dep=>this.departments=dep);
                }

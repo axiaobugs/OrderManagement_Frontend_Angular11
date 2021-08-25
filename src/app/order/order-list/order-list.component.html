@@ -1,0 +1,24 @@
+<div class="mt-1">
+    <table class="table table-striped">
+        <thead>
+          <tr class="text-center">
+            <th scope="col">OrderNumber</th>
+            <th scope="col">Stauts</th>
+            <th scope="col">Due Date</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let order of orders,let i = index" class="text-center">
+          <tr>
+            <td>{{order.orderCode}}{{order.orderNumber}}</td>
+            <td>{{order.orderStatus}}</td>
+            <td>{{order.orderRequirementsBase.dueDate|timeago}}</td>
+            <td>
+              <button class="btn btn-outline-success mr-2"  ><i class="fas fa-info mr-1"></i>Detail</button>
+              <button class="btn btn-outline-primary mr-2" ><i class="fas fa-edit mr-1"></i>Edit</button>
+              <button class="btn btn-outline-danger mr-2" ><i class="fas fa-trash mr-1"></i>Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+</div>

@@ -14,7 +14,7 @@ export class DepartmentService {
   departments$=this.departmentsSource.asObservable();
 
   constructor(private http:HttpClient) {
-
+    this.loadAllDepartment().subscribe();
   }
 
   loadAllDepartment(){

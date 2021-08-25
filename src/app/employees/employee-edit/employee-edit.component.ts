@@ -32,7 +32,6 @@ export class EmployeeEditComponent implements OnInit{
   ngOnInit(): void {
     this.loadEmployee();
     this.returnUrl=this.activatedRoute.snapshot.queryParams.returnUrl ||'/employee/home';
-    console.log("edit中查看departments: "+this.departments);
   }
 
   loadEmployee(){

@@ -1,9 +1,10 @@
 import { EmployeeReturn } from './employee';
+import { IOrderReturn } from './orderReturn';
 export interface IPagination {
     pageIndex: number;
     pageSize: number;
     count: number;
-    data: EmployeeReturn[];
+    data: EmployeeReturn[]|IOrderReturn[];
   }
   
   export class Pagination implements IPagination{
@@ -11,4 +12,12 @@ export interface IPagination {
     pageSize: number;
     count: number;
     data:EmployeeReturn[]=[];
+  }
+
+  export class OrderPagination implements IPagination{
+    pageIndex: number;
+    pageSize: number;
+    count: number;
+    data: IOrderReturn[]=[];
+
   }

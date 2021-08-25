@@ -1,5 +1,3 @@
-import { EmployeeParams } from 'src/app/shared/models/employeeParams';
-import { IPagination } from './../shared/models/pagination';
 import { EmployeeReturn } from './../shared/models/employee';
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
@@ -14,14 +12,11 @@ export class EmployeeService {
   baseUrl = environment.baseUrl;
   pagination = new Pagination();
 
-
-
-
   constructor(private http:HttpClient) { }
 
   getEmployees(params:HttpParams){
 
-    return this.http.get<IPagination>(this.baseUrl+'employee',{observe:'response',params}).pipe(
+    return this.http.get<Pagination>(this.baseUrl+'employee',{observe:'response',params}).pipe(
       map(response=>{
         this.pagination=response.body;
         return this.pagination;
@@ -38,7 +33,7 @@ export class EmployeeService {
   }
 
   updateEmployee(data:EmployeeReturn){
-    console.log("提交的数据是: "+ data.sickLeave)
+
     return this.http.put(this.baseUrl+'employee',data).pipe(
       map((response:EmployeeReturn)=>{
         console.log("更新成功");
