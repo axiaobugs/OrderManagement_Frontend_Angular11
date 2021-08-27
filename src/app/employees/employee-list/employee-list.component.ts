@@ -41,7 +41,6 @@ export class EmployeeListComponent implements OnInit {
   ngOnInit(): void {
     this.getEmployees();
     this.returnUrl=this.activatedRoute.snapshot.queryParams.returnUrl ||'/employee/home';
-    console.log(this.employees)
   }
 
   getEmployees(){

@@ -1,7 +1,7 @@
 export class OrderParams {
-    departmentId = 0;
+    orderStatus = 0;
     typeId = 0;
-    sort = "name";
+    sort = "dueDateAsc";
     pageNumber = 1;
     pageSize = 10;
     search:string;

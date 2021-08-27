@@ -1,4 +1,23 @@
 <div class="mt-1">
+  <section class="d-flex justify-content-around col-12 my-2">
+    <section class="d-flex align-items-center col-6 my-2">
+       <h5 class="text-warning mr-3">Sort</h5>
+        <select  class="custom-select "  style="width: 45%;" (change)="onSortSelected($event.target.value)">
+          <option *ngFor="let sort of sortOptions"   
+                  [selected]="orderParams.sort === sort.value"               
+                  [value]="sort.value">{{sort.name}}</option>
+        </select>
+    </section>
+    <section class="d-flex align-items-center col-6 my-2" >
+      <h5 class="text-warning mr-3">Dispay by Status</h5>
+       <select  class="custom-select"  style="width: 45%;" (change)="OnStatusSelected($event.target.value)">
+         <option *ngFor="let status of statuslist"
+                 [selected]="orderParams.status === status.value"  
+                 [value]="status.value">{{status.name}}</option>
+       </select>
+    </section>   
+            
+  </section>
     <table class="table table-striped">
         <thead>
           <tr class="text-center">
@@ -21,4 +40,16 @@
           </tr>
         </tbody>
       </table>
+</div>
+<dvi class="d-flex justify-content-start" *ngIf="totalCount>0">
+  <p>Total: {{totalCount}} Orders ! </p>
+</dvi>
+
+<div class="d-flex justify-content-end" *ngIf="totalCount>0">
+  <app-pager
+  [pageSize]="orderParams.pageSize"
+  [totalCount]="totalCount"
+  [pageNumber]="orderParams.pageNumber"
+  (pageChanged)="onPageChanged($event)"
+  ></app-pager>
 </div>

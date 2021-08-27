@@ -49,8 +49,8 @@ export const orderConfig={
     {name:'Internal',value:0},
     {name:'External',value:1}, 
   ],
-  sortOptions : [{name:'Alphabetical',value:'name'},
-    {name: 'Pay Rate: Low to High',value:'payRateAsc'},
-    {name: 'Pat Rate: High to Low',value:'patRateDesc'}]
+  sortOptions : [
+    {name: 'Due Date Asc',value:'dueDateAsc'},
+    {name: 'Due Date Desc',value:'dueDateDesc'}]
 
 }

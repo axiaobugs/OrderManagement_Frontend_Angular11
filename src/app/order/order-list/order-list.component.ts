@@ -19,6 +19,7 @@ export class OrderListComponent implements OnInit {
   pagination = new OrderPagination();
   orderParams=new OrderParams();
   sortOptions=orderConfig.sortOptions;
+  statuslist=orderConfig.orderStatus;
 
   constructor(private orderService:OrderService,
               private activatedRoute:ActivatedRoute) { }
@@ -26,16 +27,18 @@ export class OrderListComponent implements OnInit {
   ngOnInit(): void {
     this.getOrders();
     this.returnUrl=this.activatedRoute.snapshot.queryParams.returnUrl ||'/order/list';
-    console.log(this.orders)
   }
 
   getOrders(){
     let params = new HttpParams();
     // All request parameters are executed here
+    
+    params = params.append('orderStatus',this.orderParams.orderStatus)
+    
+    params = params.append('sort',this.orderParams.sort);
     params = params.append('pageIndex',this.orderParams.pageNumber.toString());
     params = params.append('pageSize',this.orderParams.pageSize.toString());
     
-
     return this.orderService.getAllOrders(params).subscribe(response=>{
       this.orders=response.data;
       this.totalCount = response.count;
@@ -44,6 +47,39 @@ export class OrderListComponent implements OnInit {
     });
   }
 
+  setOrderParams(params:OrderParams){
+    this.orderParams=params;
+  }
+
+  getOrderParams(){
+    return this.orderParams;
+  }
+
+  //TODO: 写几个事件监听函数 触发排序,分组,分页的事件
+  onSortSelected(sort:string){
+    const params = this.getOrderParams();
+    params.sort = sort;
+    this.setOrderParams(params);
+    this.getOrders();
+  }
+
+  OnStatusSelected(orderStatus:number){
+    const params = this.getOrderParams();
+    params.orderStatus = orderStatus;
+    params.pageNumber =1;
+    this.setOrderParams(params);
+    this.getOrders();
+  }
+
+  onPageChanged(event:any){
+    const params = this.getOrderParams();
+    // only execute when page number changed
+    if (params.pageNumber!==event){
+      params.pageNumber = event;
+      this.setOrderParams(params);
+      this.getOrders();
+    }
+  }
 
 
 }
