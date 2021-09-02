@@ -1,5 +1,5 @@
 import { HttpParams } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { OrderService } from './../order.service';
 import { orderConfig } from './../../shared/config/orderConfig';
 import { OrderParams } from './../../shared/models/orderParams';
@@ -22,7 +22,8 @@ export class OrderListComponent implements OnInit {
   statuslist=orderConfig.orderStatus;
 
   constructor(private orderService:OrderService,
-              private activatedRoute:ActivatedRoute) { }
+              private activatedRoute:ActivatedRoute,
+              private router:Router) { }
 
   ngOnInit(): void {
     this.getOrders();
@@ -55,7 +56,6 @@ export class OrderListComponent implements OnInit {
     return this.orderParams;
   }
 
-  //TODO: 写几个事件监听函数 触发排序,分组,分页的事件
   onSortSelected(sort:string){
     const params = this.getOrderParams();
     params.sort = sort;
@@ -79,6 +79,10 @@ export class OrderListComponent implements OnInit {
       this.setOrderParams(params);
       this.getOrders();
     }
+  }
+  
+  OnDetailHandler(id:number){
+    this.router.navigateByUrl('update/'+id)
   }
 
 

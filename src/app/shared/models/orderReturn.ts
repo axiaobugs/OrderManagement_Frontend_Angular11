@@ -1,13 +1,5 @@
 import { EmployeeReturn } from "./employee";
-import { IOrderDetailDto } from "./orderCreate";
-
-export interface OrderRequirementsBase {
-    material: number;
-    thick: number;
-    paint: string;
-    fitDate: Date;
-    dueDate: Date;
-}
+import { IOrderDetailToUpdate, IRequirementBaseToUpdate } from "./orderToUpdate";
 
 export interface IOrderReturn {
     id: number;
@@ -15,8 +7,8 @@ export interface IOrderReturn {
     orderCode: string;
     price: number;
     orderStatus: string;
-    orderRequirementsBase: OrderRequirementsBase;
-    orderDetailDtos: IOrderDetailDto[];
+    orderRequirementsBase: IRequirementBaseToUpdate;
+    orderDetails: IOrderDetailToUpdate[];
     customerId: number;
     employees: EmployeeReturn[];
 }

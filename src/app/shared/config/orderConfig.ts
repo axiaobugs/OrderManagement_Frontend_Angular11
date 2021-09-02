@@ -17,7 +17,7 @@ export const orderConfig={
     {name:'Order Paint Completed',value:8},
     {name:'Order FinalQc Completed',value:9},
     {name:'Order Dispatch Completed',value:10},
-    {name:'Order Done',value:11},
+    {name:'Order  Done',value:11},
   ],
   material:[
     {name:'Check Plat',value:0},
@@ -46,8 +46,9 @@ export const orderConfig={
 
   ],
   drawType:[
-    {name:'Internal',value:0},
-    {name:'External',value:1}, 
+    {name:'None',value:0},
+    {name:'Internal',value:1},
+    {name:'External',value:2}, 
   ],
   sortOptions : [
     {name: 'Due Date Asc',value:'dueDateAsc'},

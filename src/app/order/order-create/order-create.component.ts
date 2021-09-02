@@ -1,7 +1,8 @@
+import { IOrderReturn } from 'src/app/shared/models/orderReturn';
 import { orderConfig } from './../../shared/config/orderConfig';
 import { OrderService } from './../order.service';
 import { IOrderRequirementBaseDto, IOrderDetailDto, Order } from './../../shared/models/orderCreate';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { IOrder } from 'src/app/shared/models/orderCreate';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -12,6 +13,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./order-create.component.css']
 })
 export class OrderCreateComponent implements OnInit {
+  @Input() date:IOrderReturn;
   
   returnUrl:string;
   order:IOrder;

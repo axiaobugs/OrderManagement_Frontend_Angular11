@@ -10,13 +10,15 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { PagerComponent } from './component/pager/pager.component';
 import { PagingHeaderComponent } from './component/paging-header/paging-header.component';
+import { DataDiffPipe } from './data-diff.pipe';
 
 
 @NgModule({
   declarations: [
     TextInputComponent,
     PagerComponent,
-    PagingHeaderComponent
+    PagingHeaderComponent,
+    DataDiffPipe
   ],
   imports: [
     CommonModule,
@@ -39,7 +41,8 @@ import { PagingHeaderComponent } from './component/paging-header/paging-header.c
     BsDatepickerModule,
     PaginationModule,
     PagerComponent,
-    PagingHeaderComponent
+    PagingHeaderComponent,
+    DataDiffPipe
   ]
 })
 export class ShareModule { }

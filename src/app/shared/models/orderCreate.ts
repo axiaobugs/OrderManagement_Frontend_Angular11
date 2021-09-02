@@ -1,5 +1,6 @@
 
  export interface IOrder {
+        id:number;
         orderNumber: string;
         orderCode: number;
         price: number;
@@ -10,8 +11,8 @@
         material: number;
         thick: number;
         paint: string;
-        fitDate: string;
-        dueDate: string;
+        fitDate: Date;
+        dueDate: Date;
     }
 export interface IOrderDetailDto {
         drawerType: number;

@@ -1,0 +1,217 @@
+<div class="d-flex justify-content-center mt-5" *ngIf="order">
+    <div class="col-6">
+        <form [formGroup]="updateForm"  id="updateForm">
+            <div class="text-center mb-4">
+                <h1 class="h3 mb-3 font-weight-normal">Order Detail or Update</h1>
+            </div>
+            <!-- order number -->
+            <app-text-input  formControlName="orderNumber" [label]="'Order Number'" [name]="'orderNumber'" ></app-text-input>
+            <!-- order code -->
+            <div class="input-group mb-3" >
+                <div class="input-group-prepend">
+                  <span class="input-group-text d-flex justify-content-center" style="width: 144px;" id="basic-addon1">Order Code:</span>
+                </div>
+                <select 
+                class="custom-select form-control ml-2" 
+                id="orderCode" 
+                name="orderCode"
+                formControlName="orderCode"
+                >
+                  <option       
+                  *ngFor="let orderCoder of orderCoders"
+                  [value]="orderCoder.value" 
+                  >
+                    {{orderCoder.name}}
+                  </option>
+                </select>
+            </div>
+            <!-- price -->
+            <app-text-input formControlName="price" [label]="'Order Price'" [name]="'price'" ></app-text-input>  
+            <!-- order status -->
+            <div class="input-group mb-3" >
+                <div class="input-group-prepend">
+                    <span class="input-group-text d-flex justify-content-center" style="width: 144px;" id="basic-addon1">Order Status:</span>
+                </div>                
+                <select 
+                class="custom-select form-control ml-2" 
+                id="orderStatus" 
+                name="orderStatus"
+                formControlName="orderStatus"
+                >
+                    <option 
+                    *ngFor="let orderStatus of orderStatusList"
+                    [value]="orderStatus.value" 
+                    >
+                    {{orderStatus.name}}
+                    </option>
+                </select>
+            </div>
+            <!-- RequirementBase -->
+            <!-- Material  -->
+            <ng-form-control formGroupName='requirementBase'>
+                <div class="input-group mb-3" >
+                    <div class="input-group-prepend">
+                        <span class="input-group-text d-flex justify-content-center" style="width: 144px;" id="basic-addon1">Material:</span>
+                    </div>  
+                    <select 
+                        class="custom-select form-control ml-2" 
+                        id="material" 
+                        name="material"
+                        formControlName="material"
+                    >
+                        <option 
+                        *ngFor="let material of materials"
+                        [value]="material.value" 
+                        >
+                        {{material.name}}
+                        </option>
+                    </select> 
+                </div>
+            </ng-form-control>
+             <!-- Thickness -->
+            <ng-form-control formGroupName='requirementBase'>
+                <div class="input-group mb-3" >
+                    <div class="input-group-prepend">
+                        <span class="input-group-text d-flex justify-content-center" style="width: 144px;" id="basic-addon1">Thickness:</span>
+                    </div>                
+                    <select 
+                    class="custom-select form-control ml-2" 
+                    id="thick" 
+                    name="thick"
+                    formControlName="thick"
+                    >
+                        <option 
+                        *ngFor="let thick of thicks"
+                        [value]="thick.value" 
+                        >
+                        {{thick.name}}
+                        </option>
+                    </select>
+                </div>
+            </ng-form-control>
+            <!-- paint -->
+            <ng-form-control formGroupName='requirementBase'>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text d-flex justify-content-center" style="width: 144px;" id="basic-addon1">
+                        Need Paint ?
+                      <input class="ml-2" type="checkbox" [value]="needPaint" (change)="needPaitnChange($event)">
+                      </span>        
+                    </div>    
+                    <input
+                    *ngIf="needPaint" 
+                    type="text" 
+                    class="form-control ml-2" 
+                    formControlName="paint"
+                    id="paint"
+                    name="paint" 
+                    placeholder="paint" 
+                    aria-label="paint" 
+                    aria-describedby="basic-addon1">
+                  </div> 
+            </ng-form-control>
+            <!-- fit date -->
+            <ng-form-control formGroupName='requirementBase'>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text d-flex justify-content-center" style="width: 144px;" id="basic-addon1">
+                        Need Fit?
+                      <input class="ml-2" type="checkbox" [value]="needFit" (change)="needfitChange($event)">
+                      </span>
+                    </div>    
+                    <input
+                    *ngIf="needFit" 
+                    type="text" 
+                    class="form-control ml-2" 
+                    formControlName="fitDate"
+                    id="fitDate"
+                    name="fitDate" 
+                    bsDatepicker
+                    #dp="bsDatepicker"
+                    placeholder="Fit Date" 
+                    aria-label="Fit Date" 
+                    aria-describedby="basic-addon1">
+                  </div>
+            </ng-form-control>
+            <!-- due date -->
+            <ng-form-control formGroupName='requirementBase'>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text d-flex justify-content-center" style="width: 144px;" id="basic-addon1">
+                        Due Date: 
+                      </span>
+                      
+                    </div>    
+                    <input
+                    type="text" 
+                    class="form-control ml-2" 
+                    formControlName="dueDate"
+                    id="dueDate"
+                    name="dueDate" 
+                    bsDatepicker
+                    #dp="bsDatepicker"
+                    placeholder="Due Date" 
+                    aria-label="Due Date" 
+                    aria-describedby="basic-addon1">
+                  </div>  
+            </ng-form-control>
+            
+            
+        </form>
+
+        <form [formGroup]="orderDetailForm"  id="orderDetailForm">
+            <!-- drawtype -->
+            <div class="input-group mb-3" >
+                <div class="input-group-prepend">
+                    <span class="input-group-text d-flex justify-content-center" style="width: 144px;" id="basic-addon1">
+                    Have Draw ?
+                    <input class="ml-2" type="checkbox" [value]="needDraw" (change)="needDrawChange($event)">
+                    </span>
+                </div>                
+                <select 
+                *ngIf="needDraw"
+                class="custom-select form-control ml-2" 
+                id="drawerType" 
+                name="drawerType"
+                formControlName="drawerType"
+                >
+                    <option 
+                    *ngFor="let drawType of drawTypes"
+                    [value]="drawType.value" 
+                    >
+                    {{drawType.name}}
+                    </option>
+                </select>
+            </div>
+            <!-- draw Qty -->
+                <app-text-input *ngIf="needDraw" formControlName="drawerQuantity" [label]="'Draw Number'" [name]="'drawerQuantity'" ></app-text-input>
+            <!-- Category -->
+                <div class="input-group mb-3" >
+                    <div class="input-group-prepend">
+                        <span class="input-group-text d-flex justify-content-center" style="width: 144px;" id="basic-addon1">
+                        Category :           
+                        </span>
+                    </div>                
+                    <select 
+                    class="custom-select form-control ml-2" 
+                    id="category" 
+                    name="category"
+                    formControlName="category"
+                    >
+                        <option 
+                        *ngFor="let category of categorys"
+                        [value]="category.value" 
+                        >
+                        {{category.name}}
+                        </option>
+                    </select>
+                </div>
+            <!-- Addition Door  -->
+                <app-text-input  formControlName="additionalDoor" [label]="'Add Door Number'" [name]="'additionalDoor'" ></app-text-input>
+        </form>
+        <div class="d-flex justify-content-around">
+            <button  class=" btn btn-primary mr-2 btn-lg " [disabled]="updateForm.invalid" (click)="onSubmit()"><i class="fas fa-sync mr-1"></i>Update</button>
+            <button  class=" btn btn-warning mr-2 " (click)="cancelHandler()"><i class="fas fa-undo mr-1"></i>Cencel</button>
+        </div>
+    </div>
+</div>
