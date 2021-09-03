@@ -38,7 +38,7 @@ export class OrderUpldateComponent implements OnInit {
     this.route.data.subscribe(data=>this.order=data.order)
     // initial needFit
     this.needFit=this.order.orderRequirementsBase.fitDate==null?false:true;
-
+    console.log(this.order.orderDetails[0])
     // initial
     this.needDraw=this.order.orderDetails[0].drawerType==0?false:true;
     this.createForm();
@@ -60,6 +60,7 @@ export class OrderUpldateComponent implements OnInit {
         thick:new FormControl(this.order.orderRequirementsBase.thick),
         paint:new FormControl(this.order.orderRequirementsBase.paint==""||this.order.orderRequirementsBase.paint==null?null:this.order.orderRequirementsBase.paint),
         fitDate:new FormControl(this.order.orderRequirementsBase.fitDate==null?null:new Date(this.order.orderRequirementsBase.fitDate)),
+        
         dueDate:new FormControl(new Date(this.order.orderRequirementsBase.dueDate)),
         orderId:new FormControl(this.order.id)
       })    
@@ -69,6 +70,7 @@ export class OrderUpldateComponent implements OnInit {
       drawerType:new FormControl(this.order.orderDetails[0].drawerType),
       drawerQuantity:new FormControl(this.order.orderDetails[0].drawerQuantity),
       category:new FormControl(this.order.orderDetails[0].category),
+      // FIXME: html can't display additional door
       additionalDoor:new FormControl(this.order.orderDetails[0].additionalDoor),
       orderId:new FormControl(this.order.id)
     })

@@ -3,6 +3,6 @@ export class EmployeeParams {
     typeId = 0;
     sort = "name";
     pageNumber = 1;
-    pageSize = 10;
+    pageSize = 8;
     search:string;
   }

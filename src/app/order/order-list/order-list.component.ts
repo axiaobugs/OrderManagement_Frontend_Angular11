@@ -85,5 +85,11 @@ export class OrderListComponent implements OnInit {
     this.router.navigateByUrl('update/'+id)
   }
 
+  OnDeleteOrderHandler(id:number){
+    return this.orderService.deleteOrder(id).subscribe(()=>{
+      window.location.reload();
+    })
+  }
+
 
 }

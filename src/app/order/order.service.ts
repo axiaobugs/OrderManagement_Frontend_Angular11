@@ -45,8 +45,16 @@ export class OrderService {
   updateOrder(data:IOrderReturn){
     return this.http.put(this.baseUrl+'order',data).pipe(
       map(response=>{
-        console.log(response);
         return response;
+      })
+    )
+  }
+
+  deleteOrder(id:number){
+    return this.http.delete(this.baseUrl+'order/'+id).pipe(
+      map(res=>{
+        console.log(res)
+        return res;
       })
     )
   }
