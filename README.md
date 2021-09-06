@@ -8,8 +8,4 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 ## Page Preview
 
-![image-20210903182407118](H:\project\dotnet\front-end\orderManagement-web\README.assets\image-20210903182407118.png)
-
-![image-20210903182426154](H:\project\dotnet\front-end\orderManagement-web\README.assets\image-20210903182426154.png)
-
-![image-20210903182459863](H:\project\dotnet\front-end\orderManagement-web\README.assets\image-20210903182459863.png)
+Images in the README.assets file
