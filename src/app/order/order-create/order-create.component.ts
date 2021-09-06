@@ -5,7 +5,7 @@ import { IOrderRequirementBaseDto, IOrderDetailDto, Order } from './../../shared
 import { Component, Input, OnInit } from '@angular/core';
 import { IOrder } from 'src/app/shared/models/orderCreate';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-order-create',
@@ -51,21 +51,22 @@ export class OrderCreateComponent implements OnInit {
   })
 
   constructor(private activatedRoute:ActivatedRoute,
+              private route:Router,
               private orderService:OrderService) {
                }
 
   ngOnInit(): void {
-    this.returnUrl=this.activatedRoute.snapshot.queryParams.returnUrl ||'/home';
+    this.returnUrl=this.activatedRoute.snapshot.queryParams.returnUrl ||'/order/list';
   }
 
   onSubmit(){
     this.orderCrete.orderCreateDto=this.orderForm.value;
     this.orderCrete.orderRequirementBaseDto=this.orderRequirementBaseForm.value;
     this.orderCrete.orderDetailDto = this.orderDetailForm.value;
+    console.log(this.orderCrete)
     return this.orderService.createOrder(this.orderCrete).subscribe(res=>{
       console.log
-      window.location.reload();
-
+      this.route.navigateByUrl(this.returnUrl);
     })
   }
 

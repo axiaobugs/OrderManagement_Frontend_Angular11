@@ -43,9 +43,6 @@
     <div class="d-flex align-items-center flex-md-row">
       <ng-container class="p-2">
         <div class="dropdown ml-3 mr-5" dropdown>
-          <a class="dropdown-toggle text-light"  dropdownToggle >
-           <strong>Welcome</strong>  
-          </a>
           <div class="dropdown-menu dropdown-menu-right"  *dropdownMenu>
             <a routerLink="/basket" class="dropdown-item d-flex align-items-center py-2">
               <i class="fa fa-shopping-cart mr-3"></i> View Basket
@@ -60,9 +57,22 @@
           </div>
         </div>
       </ng-container>
-      <ng-container class="p-2">
+      <ng-container class="p-2" *ngIf="(currentUser$ | async) ===null">
         <a routerLink="/account/login" class="btn btn-outline-primary mr-2 " >Login</a>
-        <a routerLink="/account/register" class="btn btn-outline-primary mr-3" >Sign up</a>
+        <a routerLink="/account/register" class="btn btn-outline-primary mr-3" >Register</a>
+      </ng-container>
+      <ng-container *ngIf="(currentUser$ | async) as user">
+        <div class="dropdown ml-3 mr-5" dropdown>
+          <a class="dropdown-toggle" style="cursor: pointer" dropdownToggle >
+           <strong class='mr-3'>Welcome</strong>  {{user.username | uppercase}}
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" style="cursor: pointer" *dropdownMenu>
+            <div class="dropdown-divider"></div>
+            <a (click)="logout()" class="dropdown-item d-flex align-items-center py-2">
+              <i class="fa fa-sign-out mr-3"></i> Logout
+            </a>
+          </div>
+        </div>
       </ng-container>
 
     </div>

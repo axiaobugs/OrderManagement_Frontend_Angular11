@@ -21,7 +21,7 @@
   placeholder="{{label}}">
 
   
-
+  <!-- FIXME :validator need change -->
   <div class="invalid-feedback"
        *ngIf="(controlDir
        && controlDir.control
@@ -35,7 +35,8 @@
        && controlDir.control
        && !controlDir.control.valid
        && controlDir.control.dirty)">
-    <span *ngIf="controlDir.control.errors?.emailExists">Email address is in used</span>
+    <span *ngIf="controlDir.control.errors?.userExists">The user name  is in used</span>
+    <span *ngIf="controlDir.control.errors?.emailExists">The Email is in used</span>
   </div>
 </div>
 
