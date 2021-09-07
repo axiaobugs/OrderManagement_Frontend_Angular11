@@ -23,7 +23,7 @@
                 </a>
             </div>
         </div>
-        <div class="p-2 dropdown ml-3 mr-5 " dropdown *ngIf="user.roles.includes('Admin')">
+        <div class="p-2 dropdown ml-3 mr-5 " dropdown *ngIf="user.roles.includes('Admin') || user.roles.includes('Engineering')">
             <a class="dropdown-toggle text-light"  dropdownToggle >
                 <strong>Order</strong>  
             </a>
@@ -39,6 +39,22 @@
             </a>
             </div>
         </div>
+        <div class="p-2 dropdown ml-3 mr-5 " dropdown *ngIf="user.roles.includes('Admin')">
+          <a class="dropdown-toggle text-light"  dropdownToggle >
+              <strong>Account</strong>  
+          </a>
+          <div class="dropdown-menu dropdown-menu-right"  *dropdownMenu>
+          <a routerLink="/account/editrole" class="dropdown-item d-flex align-items-center py-2">
+            <i class="fas fa-user-circle mr-3"></i> EDIT ROLE
+          </a>
+          <a routerLink="/account/edit" class="dropdown-item d-flex align-items-center py-2">
+            <i class="fas fa-user-tag mr-3"></i> EDIT USER ROLE
+          </a>
+          <a  class="dropdown-item d-flex align-items-center py-2">
+              <i class="fas fa-hammer mr-3"></i> TOC
+          </a>
+          </div>
+      </div>
         <div class="p-2 ml-3 mr-5">
             <a  class="text-light" >Adding....</a>
         </div>

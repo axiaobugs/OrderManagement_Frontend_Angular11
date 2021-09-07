@@ -12,7 +12,9 @@ import { IUser } from '../shared/models/user';
 export class AccountService {
   baseUrl = environment.baseUrl;
   private currentUserSource = new ReplaySubject<IUser>(1);
+  private CurrentRolesSource = new ReplaySubject<string[]>(1);
   currentUser$=this.currentUserSource.asObservable();
+  currentRoles$=this.CurrentRolesSource.asObservable();
 
 
   constructor(private http:HttpClient,private route:Router) { 
@@ -34,6 +36,16 @@ export class AccountService {
         if(user){
           localStorage.setItem('token',user.token);
           this.currentUserSource.next(user);
+        }
+      })
+    )
+  }
+
+  loadAllRoles(){
+    return this.http.get(this.baseUrl+'account/role').pipe(
+      map((res:string[])=>{
+        if(res.length>0){
+          this.CurrentRolesSource.next(res);
         }
       })
     )
@@ -66,10 +78,11 @@ export class AccountService {
   logout(){
     localStorage.removeItem("token");
     this.currentUserSource.next(null);
-    this.route.navigateByUrl('/');
   }
 
-  // TODO: add this api in back end
+  
+  // TODO: merge those two method to one method using Usercheck params interface
+  //#region check username and email need merge
   checkUserNameExists(userName:string){
     return this.http.get(this.baseUrl+'account/exist?userName='+userName)
   }
@@ -77,5 +90,13 @@ export class AccountService {
   checkEmailExists(email:string){
     return this.http.get(this.baseUrl+'account/exist?email='+email)
   }
+  //#region 
 
+  createRole(role:Object){
+    return this.http.post(this.baseUrl+"account/role",role).pipe(
+      map(res=>{
+       return res;
+      })
+    )
+  }
 }

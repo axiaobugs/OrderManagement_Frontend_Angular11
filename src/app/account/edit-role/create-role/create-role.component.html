@@ -1,0 +1,16 @@
+<div class="d-flex justify-content-center mt-5" >
+    <div class="col-6">
+        <div class="text-center mb-4">
+            <h1 class="h3 mb-3 font-weight-normal">Create a role</h1>
+          </div>
+        <form (ngSubmit)="onSubmit()" [formGroup]="RoleForm">
+            <app-text-input formControlName="name" [label]="'Role Name'" [name]="'name'" ></app-text-input>           
+        </form>
+        <div class="d-flex justify-content-around">
+            <button  class=" btn btn-primary mr-2 btn-lg " (click)="onSubmit()"><i class="far fa-save mr-1"></i>Save</button>
+            <button  class=" btn btn-warning mr-2 " (click)="cancelHandler()"><i class="fas fa-undo mr-1"></i>Cencel</button>
+        </div>
+    </div>
+</div>
+
+
