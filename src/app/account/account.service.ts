@@ -14,6 +14,7 @@ export class AccountService {
   private currentUserSource = new ReplaySubject<IUser>(1);
   currentUser$=this.currentUserSource.asObservable();
 
+
   constructor(private http:HttpClient,private route:Router) { 
     
   }
@@ -29,7 +30,7 @@ export class AccountService {
     headers = headers.set("Authorization",`Bearer ${token}`);
     return this.http.get(this.baseUrl+'account/user',{headers}).pipe(
       map((user:IUser)=>{
-        console.log("account service"+user)
+        
         if(user){
           localStorage.setItem('token',user.token);
           this.currentUserSource.next(user);
@@ -41,9 +42,10 @@ export class AccountService {
   login(value:any){
     return this.http.post<IUser>(this.baseUrl+'account/login',value).pipe(
       map((user:IUser)=>{
-        console.log(user);
+        console.log("account service"+user.roles)
         if(user){
           localStorage.setItem("token",user.token);
+
           return this.currentUserSource.next(user);
         }
       })

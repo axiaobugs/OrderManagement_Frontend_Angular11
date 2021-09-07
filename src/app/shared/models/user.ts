@@ -4,4 +4,5 @@ export interface IUser{
     email:string;
     employeeId:number;
     token:string;
+    roles:string[];
 }

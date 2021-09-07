@@ -1,4 +1,3 @@
-import { take } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AccountService } from 'src/app/account/account.service';
@@ -21,7 +20,6 @@ export class NavBarComponent implements OnInit {
 
    ngOnInit(): void{
     this.currentUser$ = this.accountService.currentUser$;
-    console.log(this.currentUser$);
   }
 
   logout(){
